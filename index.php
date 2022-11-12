@@ -27,4 +27,35 @@ $app->get('/rota3[/{parametro1}[/{parametro2}]]', function($request, $response){
     echo '<br>Parametro 2: '. $p2;
 });
 
+// tipando o parametro da rota
+$app->get('/rota4/{parametro: .*}', function($request, $response){
+
+    $parametro = $request->getAttribute('parametro');
+    echo 'Atributo: '. $parametro;
+});
+
+//nomeando rotas
+$app->get('/rota5/{parametro}', function($request, $response){
+
+    echo 'teste rota1';
+})->setname('helloworld');
+
+$app->get('/teste', function($request, $response){
+
+    $retorno = $this->get('router')->pathFor('helloworld', ['id' => '10']);
+    echo $retorno;
+});
+
+//agrupar rotas
+$app->group('/v1', function(){
+
+    $this->get('/nome', function(){
+        echo 'Rota v1/nome';
+    });
+
+    $this->get('/data', function(){
+        echo 'Roaa v1/data';
+    });
+});
+
 $app->run();
