@@ -1,14 +1,19 @@
 <?php
-use \Psr\Http\Message\ServerRequestInterface as Request;
-use \Psr\Http\Message\ResponseInterface as Response;
 
 require 'vendor/autoload.php';
 
-$app = new \Slim\App();
-$app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
-    $name = $args['name'];
-    $response->getBody()->write("Hello, $name");
+//necessário para criar as rotas
+$app = new \Slim\App;
 
-    return $response;
+
+$app->get('/rota1', function(){
+
+    echo 'teste rota1';
 });
+
+$app->get('/rota2/{id}', function(){
+
+    echo 'teste rota2';
+});
+
 $app->run();
