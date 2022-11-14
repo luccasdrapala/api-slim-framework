@@ -15,12 +15,16 @@ class Servico{
 $container = $app->getContainer();
 $container['servico'] = function(){
     return new Servico;
-}
+};
 
-$app->get('/servico', function(Request $request, REsponse $response){
+$app->get('/servico', function(Request $request, Response $response){
 
+    //recebendo dependencia do objeto
     $servico = $this->get('servico');
     var_dump($servico);
 });
+
+/**Controllers como serviço */
+$app->get('/usuario', '\App\controllers\Home:index');
 
 $app->run();   
