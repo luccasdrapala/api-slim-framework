@@ -29,6 +29,13 @@ $app->get('/servico', function(Request $request, Response $response){
 });
 
 /**Controllers como serviço */
+
+/**container pimple */
+$container = $app->getContainer();
+$container['View'] = function(){
+    return new App\View;
+};
+
 $app->get('/usuario', '\App\controllers\Home:index');
 
 $app->run();   

@@ -13,8 +13,17 @@ class Home{
     public function index($request, $response){
 
         $requisicao = $this->container->get('request');
-        var_dump($requisicao);
-        return $response->write('teste do index');
+        // echo '<pre>';
+        // var_dump($requisicao);
+        // echo '</pre>';
+        // return $response->write('teste do index');
+        
+        $view = $this->container->get('View');
+        echo '<pre>';
+        var_dump($view);
+        echo '</pre>';
+        return $response->write('Teste index');
+
     }
 
 }
