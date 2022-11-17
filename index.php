@@ -11,31 +11,42 @@ $app = new \Slim\App([
     ]
 ]);
 
-class Servico{
-    //somente para fins didaticos
-}
+/**tipos de respostas
+ * cabeçalho, texto, Json, XML
+ */
 
-/**container pimple */
-$container = $app->getContainer();
-$container['servico'] = function(){
-    return new Servico;
-};
+$app->get('/header', function(Request $request, Response $response){
 
-$app->get('/servico', function(Request $request, Response $response){
-
-    //recebendo dependencia do objeto
-    $servico = $this->get('servico');
-    var_dump($servico);
+    return $response->write('Esse é um retorno header');
 });
 
-/**Controllers como serviço */
+$app->run();  
 
-/**container pimple */
-$container = $app->getContainer();
-$container['View'] = function(){
-    return new App\View;
-};
+// class Servico{
+//     //somente para fins didaticos
+// }
 
-$app->get('/usuario', '\App\controllers\Home:index');
+// /**container pimple */
+// $container = $app->getContainer();
+// $container['servico'] = function(){
+//     return new Servico;
+// };
 
-$app->run();   
+// $app->get('/servico', function(Request $request, Response $response){
+
+//     //recebendo dependencia do objeto
+//     $servico = $this->get('servico');
+//     var_dump($servico);
+// });
+
+// /**Controllers como serviço */
+
+// /**container pimple */
+// $container = $app->getContainer();
+// $container['View'] = function(){
+//     return new App\View;
+// };
+
+// $app->get('/usuario', '\App\controllers\Home:index');
+
+ 
