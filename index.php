@@ -16,10 +16,19 @@ $app = new \Slim\App([
  */
 
 $app->get('/header', function(Request $request, Response $response){
-
+    //metodo de texto
     $response->write('Esse é um retorno header');
     return $response->withHeader('allow', 'PUT')
                         ->withAddedHeader('Content-Lenght', 10);
+});
+
+//objeto JSON
+$app->get('/json', function(Request $request, Response $response){
+
+    return $response->withJson([
+        "nome" => "Luccas Drapala",
+        "endereco" => "Mafra"
+    ]);
 });
 
 $app->run();  
