@@ -17,7 +17,9 @@ $app = new \Slim\App([
 
 $app->get('/header', function(Request $request, Response $response){
 
-    return $response->write('Esse é um retorno header');
+    $response->write('Esse é um retorno header');
+    return $response->withHeader('allow', 'PUT')
+                        ->withAddedHeader('Content-Lenght', 10);
 });
 
 $app->run();  
