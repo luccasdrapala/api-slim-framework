@@ -41,10 +41,10 @@ $app->get('/xml', function(Request $request, Response $response){
 
 //middlewares
 
-$app->add(function(Request $request, Response $response, $next){
+$app->add(function($request, $response, $next){
 
-    $response->write('Inicio camada 1');
-    return $next($response, $request);
+    $response->write('Inicio camada 1 + ');
+    return $next($request, $response);
 
 });
 
