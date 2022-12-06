@@ -35,7 +35,28 @@ $app->get('/xml', function(Request $request, Response $response){
 
     $xml = file_get_contents('arquivo.xml');
     $response->write($xml);
-    return $response->withHeader('Content-Type', 'application/xml');
+    return $response->withHeader('Content-Type', 'application/xml'); 
+
+});
+
+//middlewares
+
+$app->add(function(Request $request, Response $response, $next){
+
+    $response->write('Inicio camada 1');
+    return $next($response, $request);
+
+});
+
+$app->get('/usuarios', function(Request $request, Response $response){
+
+    $response->write('Ação Principal usuários');
+
+});
+
+$app->get('/postagens', function(Request $request, Response $response){
+
+    $response->write('Ação Principal Postagens');
 
 });
 
