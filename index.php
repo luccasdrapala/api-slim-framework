@@ -31,6 +31,14 @@ $app->get('/json', function(Request $request, Response $response){
     ]);
 });
 
+$app->get('/xml', function(Request $request, Response $response){
+
+    $xml = file_get_contents('arquivo.xml');
+    $response->write($xml);
+    return $response->withHeader('Content-Type', 'application/xml');
+
+});
+
 $app->run();  
 
 // class Servico{
