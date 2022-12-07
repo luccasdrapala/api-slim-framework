@@ -48,6 +48,13 @@ $app->add(function($request, $response, $next){
 
 });
 
+$app->add(function($request, $response, $next){
+
+    $response->write('Inicio camada 2 + ');
+    return $next($request, $response);
+
+});
+
 $app->get('/usuarios', function(Request $request, Response $response){
 
     $response->write('Ação Principal usuários');
