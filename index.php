@@ -2,6 +2,7 @@
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 require 'vendor/autoload.php';
 
@@ -11,65 +12,85 @@ $app = new \Slim\App([
     ]
 ]);
 
+$container = $app->getContainer();
+
+$container['db'] = function(){
+
+    $capsule = new Capsule;
+    $capsule->addConnection([
+        'driver' => 'mysql',
+        'host' => 'localhost',
+        'database' => 'database',
+        'username' => 'root',
+        'password' => '',
+        'charset' => 'utf8',
+        'collation' => 'utf8_unicode_ci',
+        'prefix' => '',
+    ]);
+}
+
+$app->run();  
+
+
 /**tipos de respostas
  * cabeçalho, texto, Json, XML
  */
 
-$app->get('/header', function(Request $request, Response $response){
-    //metodo de texto
-    $response->write('Esse é um retorno header');
-    return $response->withHeader('allow', 'PUT')
-                        ->withAddedHeader('Content-Lenght', 10);
-});
+// $app->get('/header', function(Request $request, Response $response){
+//     //metodo de texto
+//     $response->write('Esse é um retorno header');
+//     return $response->withHeader('allow', 'PUT')
+//                         ->withAddedHeader('Content-Lenght', 10);
+// });
 
-//objeto JSON
-$app->get('/json', function(Request $request, Response $response){
+// //objeto JSON
+// $app->get('/json', function(Request $request, Response $response){
 
-    return $response->withJson([
-        "nome" => "Luccas Drapala",
-        "endereco" => "Mafra"
-    ]);
-});
+//     return $response->withJson([
+//         "nome" => "Luccas Drapala",
+//         "endereco" => "Mafra"
+//     ]);
+// });
 
-$app->get('/xml', function(Request $request, Response $response){
+// $app->get('/xml', function(Request $request, Response $response){
 
-    $xml = file_get_contents('arquivo.xml');
-    $response->write($xml);
-    return $response->withHeader('Content-Type', 'application/xml'); 
+//     $xml = file_get_contents('arquivo.xml');
+//     $response->write($xml);
+//     return $response->withHeader('Content-Type', 'application/xml'); 
 
-});
+// });
 
-//middlewares
+// //middlewares
 
-$app->add(function($request, $response, $next){
+// $app->add(function($request, $response, $next){
 
-    $response->write('Inicio camada 1 + ');
-    return $next($request, $response);
+//     $response->write('Inicio camada 1 + ');
+//     return $next($request, $response);
 
-});
+// });
 
-$app->add(function($request, $response, $next){
+// $app->add(function($request, $response, $next){
 
-    $response->write('Inicio camada 2 + ');
-    $response = $next($request, $response);
-    $response->write(' + Fim da camada 2');
-    return $response;
+//     $response->write('Inicio camada 2 + ');
+//     $response = $next($request, $response);
+//     $response->write(' + Fim da camada 2');
+//     return $response;
 
-});
+// });
 
-$app->get('/usuarios', function(Request $request, Response $response){
+// $app->get('/usuarios', function(Request $request, Response $response){
 
-    $response->write('Ação Principal usuários');
+//     $response->write('Ação Principal usuários');
 
-});
+// });
 
-$app->get('/postagens', function(Request $request, Response $response){
+// $app->get('/postagens', function(Request $request, Response $response){
 
-    $response->write('Ação Principal Postagens');
+//     $response->write('Ação Principal Postagens');
 
-});
+// });
 
-$app->run();  
+
 
 // class Servico{
 //     //somente para fins didaticos
