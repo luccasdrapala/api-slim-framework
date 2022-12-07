@@ -20,14 +20,19 @@ $container['db'] = function(){
     $capsule->addConnection([
         'driver' => 'mysql',
         'host' => 'localhost',
-        'database' => 'database',
+        'database' => 'slim',
         'username' => 'root',
         'password' => '',
         'charset' => 'utf8',
         'collation' => 'utf8_unicode_ci',
         'prefix' => '',
     ]);
+
+    $capsule->setAsGlobal();
+    $capsule->bootEloquent();
 }
+
+
 
 $app->run();  
 
