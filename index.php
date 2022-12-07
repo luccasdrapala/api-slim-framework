@@ -51,7 +51,9 @@ $app->add(function($request, $response, $next){
 $app->add(function($request, $response, $next){
 
     $response->write('Inicio camada 2 + ');
-    return $next($request, $response);
+    $response = $next($request, $response);
+    $response->write(' + Fim da camada 2');
+    return $response;
 
 });
 
