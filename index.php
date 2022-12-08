@@ -30,9 +30,24 @@ $container['db'] = function(){
 
     $capsule->setAsGlobal();
     $capsule->bootEloquent();
-}
 
+    return $capsule;
+};
 
+$app->get('/usuarios', function(Request $request, Response $response){
+
+    $db = $this->get('db'); //acessando instancia do db do container
+
+    $db->schema()->dropIfExists('usuarios');
+    
+    $db->schema()->create('usuarios', function($table){
+        $table->increments('id');
+        $table->string('nome');
+        $table->string('email');
+        $table->timestamps();
+    });
+
+});
 
 $app->run();  
 
@@ -123,5 +138,3 @@ $app->run();
 // };
 
 // $app->get('/usuario', '\App\controllers\Home:index');
-
- 
