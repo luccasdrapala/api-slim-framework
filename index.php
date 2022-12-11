@@ -38,20 +38,40 @@ $app->get('/usuarios', function(Request $request, Response $response){
 
     $db = $this->get('db'); //acessando instancia do db do container
 
-    $db->schema()->dropIfExists('usuarios');
+    //$db->schema()->dropIfExists('usuarios');
     
-    $db->schema()->create('usuarios', function($table){
-        $table->increments('id');
-        $table->string('nome');
-        $table->string('email');
-        $table->timestamps();
-    });
+    // $db->schema()->create('usuarios', function($table){
+    //     $table->increments('id');
+    //     $table->string('nome');
+    //     $table->string('email');
+    //     $table->timestamps();
+    // });
 
     //insert
-    $db->table('usuarios')->insert([
-        'nome' => 'Luccas Drapala',
-        'email' => 'luccasdrapala@gmail.com'
-    ]);
+    // $db->table('usuarios')->insert([
+    //     'nome' => 'Luccas Drapala',
+    //     'email' => 'luccasdrapala@gmail.com'
+    // ]);
+    
+    //update    
+    // $db->table('usuarios')
+    //    ->where('id', 1)
+    //    ->update([
+    //     'nome' => 'José Alencar JK',
+    //     'email' => 'jk@gmail.com'
+    //    ]);
+
+    //update    
+    // $db->table('usuarios')
+    //    ->where('id', 2)
+    //    ->delete();
+
+   //listar 
+   $usuarios = $db->table('usuarios')->get();
+   foreach($usuarios as $usuario){
+    echo $usuario->nome . "<br>";
+   } 
+
 
 });
 
