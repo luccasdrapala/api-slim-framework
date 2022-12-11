@@ -47,6 +47,12 @@ $app->get('/usuarios', function(Request $request, Response $response){
         $table->timestamps();
     });
 
+    //insert
+    $db->table('usuarios')->insert([
+        'nome' => 'Luccas Drapala',
+        'email' => 'luccasdrapala@gmail.com'
+    ]);
+
 });
 
 $app->run();  
