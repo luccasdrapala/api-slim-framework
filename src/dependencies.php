@@ -1,6 +1,7 @@
 <?php
 
 use Slim\App;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 return function (App $app) {
     $container = $app->getContainer();
@@ -18,5 +19,18 @@ return function (App $app) {
         $logger->pushProcessor(new \Monolog\Processor\UidProcessor());
         $logger->pushHandler(new \Monolog\Handler\StreamHandler($settings['path'], $settings['level']));
         return $logger;
+    };
+
+    //db
+    $container['db'] = function($c){
+
+        $capsule = new Capsule;
+        $arr = $c->get('settings'); //indice do array de settings.php onde esta instanciado o banco
+        $capsule->addConnection( $arr['db']);
+
+        $capsule->setAsGlobal();
+        $capsule->bootEloquent();
+
+        return $capsule;
     };
 };
