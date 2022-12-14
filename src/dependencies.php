@@ -25,12 +25,13 @@ return function (App $app) {
     $container['db'] = function($c){
 
         $capsule = new Capsule;
-        $arr = $c->get('settings'); //indice do array de settings.php onde esta instanciado o banco
-        $capsule->addConnection( $arr['db']);
+        
+        $capsule->addConnection( $c->get('settings')['db']);//indice do array de settings.php onde esta instanciado o banco
 
         $capsule->setAsGlobal();
         $capsule->bootEloquent();
 
         return $capsule;
     };
-};
+}
+?>
