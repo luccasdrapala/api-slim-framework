@@ -30,3 +30,4 @@ $schema->create($tabela, function($table){
     $table->string('fabricante', 60);
     $table->date('dt_criacao');
 });
+
