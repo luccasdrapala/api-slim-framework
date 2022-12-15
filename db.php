@@ -31,3 +31,11 @@ $schema->create($tabela, function($table){
     $table->date('dt_criacao');
 });
 
+$db->table($tabela)->insert([
+    'titulo' => 'Moto G5',
+    'descricao' => 'Smartfone Motorola f1',
+    'preco' => '1500.00',
+    'fabricante' => 'Motorola',
+    'dt_criacao' => '2022-12-14'
+]);
+
