@@ -20,4 +20,11 @@ $app->group('/api/v1', function(){
         $produto = Produto::create($dados);
         return $response->withJson($produto);
     });
+
+    $this->get('/produtos/lista/{id}', function(Request $request, Response $response, $args){
+        
+        $produto = Produto::findOrFail($args['id']);
+        return $response->withJson($produto);
+    });
+
 });
