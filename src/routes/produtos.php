@@ -38,4 +38,13 @@ $app->group('/api/v1', function(){
         $produto->update( $dados );
         return $response->withJson( $produto );
     });
+
+    //remove produto pelo id
+    $this->put('/produtos/remove/{id}', function(Request $request, Response $response, $args){
+        
+        $produto = Produto::findOrFail ($args['id']);
+        $produto->update();
+        return $response->withJson( $produto );
+    });
+
 });
