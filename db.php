@@ -28,7 +28,7 @@ $schema->create($tabela, function($table){
     $table->text('descricao');
     $table->decimal('preco', 11,2);
     $table->string('fabricante', 60);
-    $table->date('dt_criacao');
+    $table->timestamps();
 });
 
 $db->table($tabela)->insert([
@@ -36,6 +36,7 @@ $db->table($tabela)->insert([
     'descricao' => 'Smartfone Motorola f1',
     'preco' => '1500.00',
     'fabricante' => 'Motorola',
-    'dt_criacao' => '2022-12-14'
+    'created_at' => '2022-12-17',
+    'updated_at' => '2022-12-17',
 ]);
 

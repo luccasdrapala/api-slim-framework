@@ -13,4 +13,11 @@ $app->group('/api/v1', function(){
         $produtos = Produto::get();
         return $response->withJson($produtos);
     });
+    
+    $this->post('/produtos/adiciona', function(Request $request, Response $response){
+        
+        $dados = $request->getParsedBody(); //captura o post
+        $produto = Produto::create($dados);
+        return $response->withJson($produto);
+    });
 });
