@@ -40,10 +40,10 @@ $app->group('/api/v1', function(){
     });
 
     //remove produto pelo id
-    $this->put('/produtos/remove/{id}', function(Request $request, Response $response, $args){
+    $this->delete('/produtos/remove/{id}', function(Request $request, Response $response, $args){
         
-        $produto = Produto::findOrFail ($args['id']);
-        $produto->update();
+        $produto = Produto::findOrFail($args['id']);
+        $produto->delete();
         return $response->withJson( $produto );
     });
 
