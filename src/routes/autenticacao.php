@@ -17,7 +17,8 @@ $app->group('/api/token', function(Request $request, Response $response){ //usua
 
     if(!is_null($usuario) && (md5($senha) === $usuario->senha)){
 
-        //
+        //gerar token
+        
     }
 
 });
