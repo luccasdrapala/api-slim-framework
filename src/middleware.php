@@ -2,6 +2,10 @@
 
 use Slim\App;
 
+$app->add(
+         
+);
+
 $app->add(function ($req, $res, $next) {
     $response = $next($req, $res);
     return $response
