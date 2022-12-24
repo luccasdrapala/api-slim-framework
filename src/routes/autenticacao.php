@@ -9,7 +9,7 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
 //routes para geração de token
-$app->group('/api/token', function(Request $request, Response $response){ //usuario precisa fazer post para essa rota passando usuario e senha (md5)
+$app->post('/api/token', function(Request $request, Response $response){ //usuario precisa fazer post para essa rota passando usuario e senha (md5)
 
     $dados = $request->getParsedBody();
     $email = $dados['email'] ?? null;
@@ -18,11 +18,14 @@ $app->group('/api/token', function(Request $request, Response $response){ //usua
     $usuario = Usuario::where('email', $email)->first(); //recupera o email do usuario (contando que ja esteja validado)
 
     if(!is_null($usuario) && (md5($senha) === $usuario->senha)){
-
+        
+        //jwt exige model como array
+        $usuarioArray = (array) $usuario;
+        
         //gerar token
         //chave de criptografia
         $secretKey = $this->get('settings')['secretKey']; //vem de settings
-        $token = JWT::encode($usuario, $secretKey, 'HS256');
+        $token = JWT::encode($usuarioArray, $secretKey, 'HS256');
 
         return $response->withJson([
             'chave' => $token
