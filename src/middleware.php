@@ -3,10 +3,10 @@
 use Slim\App;
 
 $app->add(new Tuupola\Middleware\JwtAuthentication([
-    "header" => "X-Token",
+    "header" => "token",
     "regexp" => "/(.*)/",
-    "path" => "/api", /* or ["/api", "/admin"] */
-    "ignore" => ["/api/token"],
+    "path" => "public/api", /* or ["/api", "/admin"] */
+    "ignore" => ["public/api/token"],
     "secret" => $container->get('settings')['secretKey']
 ]));
 
